@@ -1,0 +1,7 @@
+FROM php:%%PHP_VERSION%%-fpm-alpine
+
+MAINTAINER ZiHang Gao <ocdoco@gmail.com>
+
+RUN set -xe
+# Install build dependent
+# Clean

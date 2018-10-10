@@ -1,0 +1,8 @@
+version: "3"
+
+services:
+  php:
+    build:
+      context: .
+      dockerfile: ${DOCKERFILE_NAME}
+    image: ${DCM_IMAGE_PREFIX}/php:${PHP_VERSION}

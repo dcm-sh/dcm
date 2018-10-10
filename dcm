@@ -1,0 +1,45 @@
+#!/bin/sh
+#
+# Dcm
+#
+# Author: ZiHang Gao <ocdoco@gmail.com>
+
+usage() {
+    echo
+    printf "Example:${NC}"
+    printf "    $ dcm php -V${NC}"
+    echo
+    printf "Options:${NC}"
+    printf "    -V, --version   Output the version number${NC}"
+    printf "    -h, --help      Output usage information${NC}"
+    echo
+    printf "Commands:${NC}"
+    printf "    install         Install the mirror you need${NC}"
+    printf "    php             PHP language${NC}"
+    echo
+}
+
+command=$1
+if [ "$command" = "" ]; then
+    command="-h"
+fi
+
+currentPath=$(pwd)
+basePath=$(cd `dirname $0`; pwd)
+
+eval $(cat $basePath/.dcmrc)
+export DCM_IMAGE_PREFIX="${DCM_REPOSITORY}/$DOCKER_IMAGE_PREFIX"
+
+for script in $basePath/cmd/*.sh ; do
+    if [ -r $script ] ; then
+        . $script
+    fi
+done
+
+case "$command" in
+    --help|-h) usage;;
+    -V|--version) printVersion;;
+    install) install "$@";;
+    start) start "$@";;
+    php) php "$@";;
+esac

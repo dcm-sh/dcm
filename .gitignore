@@ -1,0 +1,4 @@
+*.local
+*.local.conf
+*.local.ini
+**/data/logs
